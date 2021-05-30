@@ -16,9 +16,9 @@ Isn’t a full game, just some MetroidVania mechanics that I want to implement i
 The Final project is going to contain:</p>
 <p><strong>Player</strong></p>
 <ul>
-<li>Iddle</li>
-<li>Walk</li>
-<li>Jump/Land</li>
+<li>Iddle ✔</li>
+<li>Walk ✔</li>
+<li>Jump/Land ✔</li>
 <li>Crouch</li>
 <li>Dash</li>
 <li>Attack Combo</li>

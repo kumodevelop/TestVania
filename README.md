@@ -47,7 +47,7 @@ The Final project is going to contain:</p>
 <ul>
 <li>Parallax</li>
 <li>Plataform Mechanics</li>
-<li>Camera Follow</li>
+<li>Camera Follow ✔</li>
 <li>Camera Effects</li>
 <li>Backtracking System</li>
 <li>Quest System</li>

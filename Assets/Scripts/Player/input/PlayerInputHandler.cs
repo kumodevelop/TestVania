@@ -10,9 +10,11 @@ public class PlayerInputHandler : MonoBehaviour
     public int normalizeInputY { get; private set; }
     public bool jumpInput { get; private set; }
 
+    public bool jumpInputStop { get; private set; }
+
     public float inputHoldTime;
 
-    public float jumpInputStartTime;
+    private float jumpInputStartTime;
 
     private void Update()
     {
@@ -25,6 +27,8 @@ public class PlayerInputHandler : MonoBehaviour
         {
             jumpInput = false;
         }
+
+        
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
@@ -38,11 +42,16 @@ public class PlayerInputHandler : MonoBehaviour
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
-
         if(context.started)
         {
             jumpInput = true;
+            jumpInputStop = false;
             jumpInputStartTime = Time.time;
+        }
+
+        if (context.canceled)
+        {
+            jumpInputStop = true;
         }
     }
     public void useJumpInput()

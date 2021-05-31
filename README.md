@@ -33,6 +33,7 @@ The Final project is going to contain:</p>
 <li>Idle</li>
 <li>Walk</li>
 <li>Jump</li>
+<li>Double Jump</li>
 <li>Attack Combo</li>
 <li>Follow Player</li>
 <li>Boss Mechanics</li>

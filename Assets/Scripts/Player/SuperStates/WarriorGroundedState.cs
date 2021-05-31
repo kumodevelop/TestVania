@@ -6,7 +6,8 @@ public class WarriorGroundedState : WarriorState
 {
     protected int Xinput;
     protected int Yinput;
-    public bool jumpInput;  
+    public bool jumpInput;
+    private bool isGrounded;
     public WarriorGroundedState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
 
@@ -15,11 +16,13 @@ public class WarriorGroundedState : WarriorState
     public override void DoChecks()
     {
         base.DoChecks();
+        isGrounded = player.CheckGround();
     }
 
     public override void Enter()
     {
         base.Enter();
+        player.jumpState.ResetJumps();
     }
 
     public override void Exit()
@@ -34,10 +37,15 @@ public class WarriorGroundedState : WarriorState
         Yinput = player.inputHandler.normalizeInputY;
         jumpInput = player.inputHandler.jumpInput;
 
-        if(jumpInput)
+        if(jumpInput && player.jumpState.CanJump())
         {
             player.inputHandler.useJumpInput();
             stateMachine.ChangeState(player.jumpState);
+        }
+        else if(!isGrounded)
+        {
+            player.jumpState.DecreaseJumps();
+            stateMachine.ChangeState(player.inAirState);
         }
     }
 

@@ -38,6 +38,8 @@ public class WarriorController : MonoBehaviour
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask isGroundLayer;
+    public int jumpqnt;
+    public float jumpHighMultiplier;
     #endregion   
 
     #region Functions

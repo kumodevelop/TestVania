@@ -59,15 +59,15 @@
     <Compile Include="Assets\Scripts\Player\Substates\WarriorIdleState.cs" />
     <Compile Include="Assets\Scripts\Player\Substates\WarriorWalkState.cs" />
     <Compile Include="Assets\Scripts\Player\WarriorState.cs" />
+    <Compile Include="Assets\Scripts\Player\Substates\WarriorJumpState.cs" />
+    <Compile Include="Assets\Scripts\Player\SuperStates\WarriorAbilityState.cs" />
+    <Compile Include="Assets\Scripts\Player\Substates\WarriorLandState.cs" />
     <Compile Include="Assets\Scripts\Player\SuperStates\WarriorGroundedState.cs" />
     <Compile Include="Assets\Scripts\Player\WarriorStateMachine.cs" />
     <Compile Include="Assets\Scripts\Player\WarriorController.cs" />
-    <Compile Include="Assets\Scripts\Player\input\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
-    <Compile Include="Assets\Scripts\Player\SuperStates\WarriorAbilityState.cs" />
-    <Compile Include="Assets\Scripts\Player\Substates\WarriorJumpState.cs" />
+    <Compile Include="Assets\Scripts\Player\input\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\Player\Freestate\WarriorInAirState.cs" />
-    <Compile Include="Assets\Scripts\Player\Freestate\WarriorLandState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

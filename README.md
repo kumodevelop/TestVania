@@ -16,7 +16,7 @@ Isn’t a full game, just some MetroidVania mechanics that I want to implement i
 The Final project is going to contain:</p>
 <p><strong>Player</strong></p>
 <ul>
-<li>Iddle ✔</li>
+<li>Idle ✔</li>
 <li>Walk ✔</li>
 <li>Jump/Land ✔</li>
 <li>Crouch</li>
@@ -24,18 +24,18 @@ The Final project is going to contain:</p>
 <li>Attack Combo</li>
 <li>Air Attack</li>
 <li>Crouch Attack</li>
-<li>-Get Hit</li>
-<li>-Die</li>
-<li>-Input Handler</li>
+<li>Get Hit</li>
+<li>Die</li>
+<li>Input Handler ✔</li>
 </ul>
 <p><strong>Enemies</strong></p>
 <ul>
-<li>Iddle</li>
+<li>Idle</li>
 <li>Walk</li>
 <li>Jump</li>
 <li>Attack Combo</li>
 <li>Follow Player</li>
-<li>-Boss Mechanics</li>
+<li>Boss Mechanics</li>
 </ul>
 <p><strong>UI</strong></p>
 <ul>
@@ -49,7 +49,7 @@ The Final project is going to contain:</p>
 <li>Plataform Mechanics</li>
 <li>Camera Follow</li>
 <li>Camera Effects</li>
-<li>-Backtracking System</li>
+<li>Backtracking System</li>
 <li>Quest System</li>
 </ul>
 <p><strong>Input Controller</strong><br>

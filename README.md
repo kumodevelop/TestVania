@@ -31,7 +31,7 @@ The Final project is going to contain:</p>
 </ul>
 <p><strong>Enemies</strong></p>
 <ul>
-<li>Idle</li>
+<li>Idle ✔</li>
 <li>Walk</li>
 <li>Jump</li>
 <li>Attack Combo</li>

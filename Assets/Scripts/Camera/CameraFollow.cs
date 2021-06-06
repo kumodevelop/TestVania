@@ -11,7 +11,7 @@ public class CameraFollow : MonoBehaviour
     public Vector2 maxXAndY;        // The maximum x and y coordinates the camera can have.
     public float camSize;
     Camera setCam;
-
+	
 
 	private Transform player;		// Reference to the player's transform.
 

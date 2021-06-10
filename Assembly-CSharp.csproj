@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Camera\CameraFollow.cs" />
     <Compile Include="Assets\Scripts\Player\input\PlayerInputHandler.cs" />
     <Compile Include="Assets\Scripts\Player\Freestate\WarriorInAirState.cs" />
+    <Compile Include="Assets\Scripts\Player\Substates\WarriorDashState.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">

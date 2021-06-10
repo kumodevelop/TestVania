@@ -7,6 +7,7 @@ public class WarriorAbilityState : WarriorState
 
     protected bool isAbilityDone;
     protected bool isGrounded;
+    protected bool isDashing = false;
     public WarriorAbilityState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
@@ -33,11 +34,11 @@ public class WarriorAbilityState : WarriorState
         base.LogicUpdate();
         if(isAbilityDone)
         {
-            if(isGrounded && player.currentVelocity.y < 0.01f)
+            if(isGrounded && player.currentVelocity.y < 0.01f && !isDashing)
             {
                 stateMachine.ChangeState(player.idleState);
             }
-            else
+            else if(!isGrounded && !isDashing)
             {
                 stateMachine.ChangeState(player.inAirState);
             }

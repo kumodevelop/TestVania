@@ -27,7 +27,7 @@ public class WarriorWalkState : WarriorGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
+        if(!dashInput)
         player.SetVelocityX(player.speed * Xinput);
 
         if(Xinput==0)

@@ -8,10 +8,18 @@ public class WarriorController : MonoBehaviour
     [Header("Variables")]
     public float speed;
     public float jumpspeed;
+    public float dashingTime;
     [HideInInspector]
     public Rigidbody2D rb;
     public PlayerInputHandler inputHandler { get; private set; }
     public Animator Anim { get; private set; }
+
+    public float dashForce;
+
+    private Vector2 addDashForce;
+       
+
+    private float dashStopTime;
     #endregion
 
     #region StateMachines
@@ -23,6 +31,8 @@ public class WarriorController : MonoBehaviour
 
     public WarriorInAirState inAirState { get; private set; }
     public WarriorLandState landState { get; private set; }
+
+    public WarriorDashState dashState { get; private set; }
 
     #endregion
 
@@ -42,7 +52,7 @@ public class WarriorController : MonoBehaviour
     public float jumpHighMultiplier;
     #endregion   
 
-    #region Functions
+    #region BasicFunctions
     private void Awake()
     {
         StateMachine = new WarriorStateMachine();
@@ -52,11 +62,11 @@ public class WarriorController : MonoBehaviour
         jumpState = new WarriorJumpState(this, StateMachine, "inAir");
         inAirState = new WarriorInAirState(this, StateMachine, "inAir");
         landState = new WarriorLandState(this, StateMachine, "land");
+        dashState = new WarriorDashState(this, StateMachine, "dash");
         facingDirection = 1;
-        
+                
     }
-
-    
+   
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -65,6 +75,7 @@ public class WarriorController : MonoBehaviour
         StateMachine.Initialize(idleState);
     }
 
+    
     private void Update()
     {
         currentVelocity = rb.velocity;
@@ -75,7 +86,9 @@ public class WarriorController : MonoBehaviour
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
+    #endregion
 
+    #region MechanicsFuncions
     public void SetVelocityX(float velocity)
     {
         workspace.Set(velocity, currentVelocity.y);
@@ -89,11 +102,17 @@ public class WarriorController : MonoBehaviour
         rb.velocity = workspace;
         currentVelocity = workspace;
     }
-
-    private void Turning()
+    
+    public void SetDash()
     {
-        facingDirection *= -1;
-        transform.Rotate(0.0f, 180f, 0.0f);
+        addDashForce.Set(dashForce * facingDirection, 0);
+        rb.velocity = addDashForce;
+    }
+
+    public void StopDash()
+    {
+        addDashForce.Set(0, 0);
+        rb.velocity = addDashForce;
     }
 
     public void CheckFlip(int xinput)
@@ -102,6 +121,12 @@ public class WarriorController : MonoBehaviour
         {
             Turning();
         }
+    }
+
+    private void Turning()
+    {
+        facingDirection *= -1;
+        transform.Rotate(0.0f, 180f, 0.0f);
     }
 
     public bool CheckGround()
@@ -120,6 +145,8 @@ public class WarriorController : MonoBehaviour
     }
 
     #endregion
+
+  
 
 
 }

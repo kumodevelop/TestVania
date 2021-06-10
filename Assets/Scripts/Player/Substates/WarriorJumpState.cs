@@ -10,8 +10,6 @@ public class WarriorJumpState : WarriorAbilityState
         jumpsleft = player.jumpqnt;
     }
 
-
-
     public override void Enter()
     {
         base.Enter();

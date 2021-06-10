@@ -10,15 +10,27 @@ public class PlayerInputHandler : MonoBehaviour
     public int normalizeInputY { get; private set; }
     public bool jumpInput { get; private set; }
 
+    public bool dashInput { get; private set; }
+
     public bool jumpInputStop { get; private set; }
 
-    public float inputHoldTime;
+    public bool dashInputStop { get; private set; }
 
+    public float inputHoldTime;
+    
     private float jumpInputStartTime;
+
+    public float inputDashTime;
+
+    private float dashInputStartTime;
+
+    private int teste;
 
     private void Update()
     {
         CheckInputTime();
+
+        CheckDashTime();
     }
 
     private void CheckInputTime()
@@ -26,18 +38,39 @@ public class PlayerInputHandler : MonoBehaviour
         if(Time.time >= jumpInputStartTime+inputHoldTime)
         {
             jumpInput = false;
-        }
+        }        
+    }
 
-        
+    private void CheckDashTime()
+    {
+        if (Time.time >= dashInputStartTime + inputDashTime)
+        {
+            dashInput = false;
+        }
     }
 
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
-        //Debug.Log("Andando!");
+        if (Mathf.Abs(RawMovementInput.x) > 0.5f && !dashInput)
+        {
+            normalizeInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
+            
+        }
+        else
+        {
+            normalizeInputX = 0;
+        }
 
-        normalizeInputX =(int)(RawMovementInput * Vector2.right).normalized.x;
-        normalizeInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
+        if (Mathf.Abs(RawMovementInput.y) > 0.5f)
+        {
+            normalizeInputY = (int)(RawMovementInput * Vector2.up).normalized.y;
+        }
+        else
+        {
+            normalizeInputY = 0;
+        }       
+            
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -53,6 +86,21 @@ public class PlayerInputHandler : MonoBehaviour
         {
             jumpInputStop = true;
         }
+    }
+
+    public void OnDashInput(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            dashInput = true;
+            dashInputStop = false;
+            dashInputStartTime = Time.time;            
+        }
+        if (context.canceled)
+        {
+            dashInputStop = true;
+        }
+
     }
     public void useJumpInput()
     {

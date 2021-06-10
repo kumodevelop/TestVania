@@ -8,6 +8,7 @@ public class WarriorGroundedState : WarriorState
     protected int Yinput;
     public bool jumpInput;
     private bool isGrounded;
+    public bool dashInput;
     public WarriorGroundedState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
 
@@ -36,6 +37,7 @@ public class WarriorGroundedState : WarriorState
         Xinput = player.inputHandler.normalizeInputX;
         Yinput = player.inputHandler.normalizeInputY;
         jumpInput = player.inputHandler.jumpInput;
+        dashInput = player.inputHandler.dashInput;
 
         if(jumpInput && player.jumpState.CanJump())
         {
@@ -47,6 +49,11 @@ public class WarriorGroundedState : WarriorState
             player.jumpState.DecreaseJumps();
             stateMachine.ChangeState(player.inAirState);
         }
+        if(dashInput && isGrounded)
+        {
+            stateMachine.ChangeState(player.dashState);
+        }
+        
     }
 
     public override void PhysicsUpdate()

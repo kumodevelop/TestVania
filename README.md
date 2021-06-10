@@ -21,7 +21,7 @@ The Final project is going to contain:</p>
 <li>Jump/Land ✔</li>
 <li>Double Jump ✔</li>
 <li>Crouch</li>
-<li>Dash</li>
+<li>Dash ✔</li>
 <li>Attack Combo</li>
 <li>Air Attack</li>
 <li>Crouch Attack</li>
@@ -57,6 +57,7 @@ The Final project is going to contain:</p>
 <em>(Keyboard Only)</em><br>
 Arrow keys - Move the player<br>
 SPACE - Jump<br>
+D Key - Dash<br>
 A Key - Attack</p>
 <p><strong>Graphics</strong><br>
 PixelArt 2D Style<br>

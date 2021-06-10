@@ -528,7 +528,7 @@ MonoBehaviour:
   jumpspeed: 18
   dashingTime: 0.3
   rb: {fileID: 0}
-  dashForce: 20
+  dashForce: 22
   groundCheck: {fileID: 1852823971}
   groundCheckRadius: 0.3
   isGroundLayer:

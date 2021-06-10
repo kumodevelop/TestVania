@@ -9,6 +9,7 @@ public class WarriorGroundedState : WarriorState
     public bool jumpInput;
     private bool isGrounded;
     public bool dashInput;
+    public bool isLand;
     public WarriorGroundedState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
 
@@ -49,7 +50,7 @@ public class WarriorGroundedState : WarriorState
             player.jumpState.DecreaseJumps();
             stateMachine.ChangeState(player.inAirState);
         }
-        if(dashInput && isGrounded)
+        else if(dashInput && isGrounded && !isLand)
         {
             stateMachine.ChangeState(player.dashState);
         }

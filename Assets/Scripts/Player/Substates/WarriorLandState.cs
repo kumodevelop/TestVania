@@ -12,6 +12,7 @@ public class WarriorLandState : WarriorGroundedState
     {
         base.Enter();
         player.SetVelocityX(0f);
+        isLand = true;
     }
 
     public override void LogicUpdate()

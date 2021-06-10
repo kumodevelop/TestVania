@@ -52,7 +52,7 @@ public class PlayerInputHandler : MonoBehaviour
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
-        if (Mathf.Abs(RawMovementInput.x) > 0.5f && !dashInput)
+        if (Mathf.Abs(RawMovementInput.x) > 0.5f)
         {
             normalizeInputX = (int)(RawMovementInput * Vector2.right).normalized.x;
             
@@ -98,7 +98,7 @@ public class PlayerInputHandler : MonoBehaviour
         }
         if (context.canceled)
         {
-            dashInputStop = true;
+            //dashInputStop = true;
         }
 
     }

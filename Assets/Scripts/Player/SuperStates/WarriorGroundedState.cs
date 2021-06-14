@@ -55,10 +55,15 @@ public class WarriorGroundedState : WarriorState
         {
             stateMachine.ChangeState(player.dashState);
         }
-        if(isGrounded && Yinput ==-1 && !isLand)
+        if(isGrounded && Yinput ==-1)
         {
+            isCrouch = true;
             stateMachine.ChangeState(player.inCrouchState);
-        }       
+        } 
+        else
+        {
+            isCrouch = false;
+        }
     }
 
     public override void PhysicsUpdate()

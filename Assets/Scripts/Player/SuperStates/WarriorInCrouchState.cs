@@ -5,6 +5,7 @@ using UnityEngine;
 public class WarriorInCrouchState : WarriorState
 {
     private bool isGrounded;
+    protected int Xinput;
     protected int Yinput;
     public WarriorInCrouchState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -19,6 +20,7 @@ public class WarriorInCrouchState : WarriorState
     public override void Enter()
     {
         base.Enter();
+        player.SetVelocityX(0f);
     }
 
     public override void Exit()
@@ -29,8 +31,10 @@ public class WarriorInCrouchState : WarriorState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
+        Xinput = player.inputHandler.normalizeInputX;
         Yinput = player.inputHandler.normalizeInputY;
-        if (isGrounded && Yinput != -1)
+        player.CheckFlip(Xinput);
+        if (Yinput == 0)
         {
             stateMachine.ChangeState(player.idleState);
         }

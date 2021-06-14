@@ -20,7 +20,7 @@ The Final project is going to contain:</p>
 <li>Walk ✔</li>
 <li>Jump/Land ✔</li>
 <li>Double Jump ✔</li>
-<li>Crouch</li>
+<li>Crouch ✔</li>
 <li>Dash ✔</li>
 <li>Attack Combo</li>
 <li>Air Attack</li>

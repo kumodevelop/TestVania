@@ -21,8 +21,18 @@ public class WarriorLandState : WarriorGroundedState
         
         if (isAnimationFinish)
         {
-            stateMachine.ChangeState(player.idleState);
+            if(Xinput==-1)
+            {
+                isCrouch = true;
+                stateMachine.ChangeState(player.inCrouchState);
+            }
+            else
+            {
+                stateMachine.ChangeState(player.idleState);
+            }
+            
         }
+        
     }
     
 }

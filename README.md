@@ -55,7 +55,8 @@ The Final project is going to contain:</p>
 </ul>
 <p><strong>Input Controller</strong><br>
 <em>(Keyboard Only)</em><br>
-Arrow keys - Move the player<br>
+Left and Right Arrow keys - Move the player<br>
+Down Arrow Key - Crouch<br>
 SPACE - Jump<br>
 D Key - Dash<br>
 A Key - Attack</p>

@@ -10,6 +10,7 @@ public class WarriorGroundedState : WarriorState
     private bool isGrounded;
     public bool dashInput;
     public bool isLand;
+    public bool isCrouch;
     public WarriorGroundedState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
 
@@ -54,7 +55,10 @@ public class WarriorGroundedState : WarriorState
         {
             stateMachine.ChangeState(player.dashState);
         }
-        
+        if(isGrounded && Yinput ==-1 && !isLand)
+        {
+            stateMachine.ChangeState(player.inCrouchState);
+        }       
     }
 
     public override void PhysicsUpdate()

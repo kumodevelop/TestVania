@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorWalkState : WarriorGroundedState
+public class WarriorCrouchState : WarriorGroundedState
 {
-    public WarriorWalkState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
+    public WarriorCrouchState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
-
     }
 
     public override void DoChecks()
@@ -17,6 +16,7 @@ public class WarriorWalkState : WarriorGroundedState
     public override void Enter()
     {
         base.Enter();
+        isCrouch = true;
     }
 
     public override void Exit()
@@ -27,13 +27,6 @@ public class WarriorWalkState : WarriorGroundedState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if(!dashInput && !isCrouch)
-        player.SetVelocityX(player.speed * Xinput);
-
-        if(Xinput==0)
-        {
-            stateMachine.ChangeState(player.idleState);
-        }
     }
 
     public override void PhysicsUpdate()

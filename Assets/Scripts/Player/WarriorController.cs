@@ -30,9 +30,12 @@ public class WarriorController : MonoBehaviour
     public WarriorJumpState jumpState { get; private set; }
 
     public WarriorInAirState inAirState { get; private set; }
+    public WarriorInCrouchState inCrouchState { get; private set; }
     public WarriorLandState landState { get; private set; }
 
     public WarriorDashState dashState { get; private set; }
+
+   // public WarriorCrouchState crouchState { get; private set; }
 
     #endregion
 
@@ -63,6 +66,7 @@ public class WarriorController : MonoBehaviour
         inAirState = new WarriorInAirState(this, StateMachine, "inAir");
         landState = new WarriorLandState(this, StateMachine, "land");
         dashState = new WarriorDashState(this, StateMachine, "dash");
+        inCrouchState = new WarriorInCrouchState(this, StateMachine, "crouch");
         facingDirection = 1;
                 
     }

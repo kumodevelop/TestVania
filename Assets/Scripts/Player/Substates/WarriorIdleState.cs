@@ -19,6 +19,9 @@ public class WarriorIdleState : WarriorGroundedState
     {
         base.Enter();
         player.SetVelocityX(0f);
+        colliderOffset.Set(0, 1.08f);
+        colliderSize.Set(0.73f, 1.94f);
+        player.ChangeCollider(colliderOffset, colliderSize);
         
     }
 

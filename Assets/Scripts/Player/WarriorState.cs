@@ -7,6 +7,9 @@ public class WarriorState
     protected WarriorController player;
     protected WarriorStateMachine stateMachine;
 
+    public Vector2 colliderOffset;
+    public Vector2 colliderSize;
+
     protected float startTime;
 
     private string animBoolName;

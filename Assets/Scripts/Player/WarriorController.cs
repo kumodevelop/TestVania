@@ -17,7 +17,9 @@ public class WarriorController : MonoBehaviour
     public float dashForce;
 
     private Vector2 addDashForce;
-       
+
+   // [HideInInspector]
+    public CapsuleCollider2D collider;
 
     private float dashStopTime;
     #endregion
@@ -73,10 +75,18 @@ public class WarriorController : MonoBehaviour
    
     private void Start()
     {
+        collider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();       
         inputHandler = GetComponent<PlayerInputHandler>();
         StateMachine.Initialize(idleState);
+        
+    }
+
+    public void ChangeCollider(Vector2 offsetnew,Vector2 sizenew)
+    {
+        collider.offset = offsetnew;
+        collider.size = sizenew;
     }
 
     

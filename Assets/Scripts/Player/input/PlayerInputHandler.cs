@@ -5,16 +5,28 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
+    #region Input Variables
     public Vector2 RawMovementInput { get; private set; }
     public int normalizeInputX { get; private set; }
     public int normalizeInputY { get; private set; }
     public bool jumpInput { get; private set; }
 
+    public bool crouchInput { get; private set; }
+
     public bool dashInput { get; private set; }
+
+    public bool attackInput { get; private set; }
 
     public bool jumpInputStop { get; private set; }
 
     public bool dashInputStop { get; private set; }
+
+    public bool attackInputStop { get; private set; }
+
+    
+    #endregion
+
+    #region Hold Time Variables
 
     public float inputHoldTime;
     
@@ -24,15 +36,29 @@ public class PlayerInputHandler : MonoBehaviour
 
     private float dashInputStartTime;
 
-    private int teste;
+    public float inputAttackTime;
+
+    private float attackInputStartTime;
+
+    #endregion
 
     private void Update()
     {
         CheckInputTime();
 
         CheckDashTime();
+
+        CheckCrouch();
+
+        CheckAttackTime();
     }
 
+    public void useJumpInput()
+    {
+        jumpInput = false;
+    }
+
+    #region Check Functions
     private void CheckInputTime()
     {
         if(Time.time >= jumpInputStartTime+inputHoldTime)
@@ -46,9 +72,32 @@ public class PlayerInputHandler : MonoBehaviour
         if (Time.time >= dashInputStartTime + inputDashTime)
         {
             dashInput = false;
+            
         }
     }
 
+    public void CheckCrouch()
+    {
+        if (normalizeInputY == -1)
+        {
+            crouchInput = true;
+        }
+        else
+        {
+            crouchInput = false;
+        }
+    }
+
+    private void CheckAttackTime()
+    {
+        if (Time.time >= attackInputStartTime + inputAttackTime)
+        {
+            attackInput = false;
+        }
+    }
+    #endregion
+
+    #region Input Functions
     public void OnMoveInput(InputAction.CallbackContext context)
     {
         RawMovementInput = context.ReadValue<Vector2>();
@@ -72,6 +121,7 @@ public class PlayerInputHandler : MonoBehaviour
         }       
             
     }
+    
 
     public void OnJumpInput(InputAction.CallbackContext context)
     {
@@ -93,8 +143,9 @@ public class PlayerInputHandler : MonoBehaviour
         if(context.started)
         {
             dashInput = true;
-            dashInputStop = false;
-            dashInputStartTime = Time.time;            
+            //dashInputStop = false;
+            dashInputStartTime = Time.time;
+            CheckAttackTime();
         }
         if (context.canceled)
         {
@@ -102,10 +153,24 @@ public class PlayerInputHandler : MonoBehaviour
         }
 
     }
-    public void useJumpInput()
+
+    public void OnAttackInput(InputAction.CallbackContext context)
     {
-        jumpInput = false;
+        if (context.started)
+        {
+            attackInput = true;
+            //attackInputStop = false;
+            attackInputStartTime = Time.time;
+        }           
+        if (context.canceled)
+        {
+            attackInput = false;
+        }
+           // attackInput = false;
     }
+    #endregion
+
+    
 
 
 }

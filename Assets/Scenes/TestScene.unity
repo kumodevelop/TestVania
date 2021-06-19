@@ -527,9 +527,9 @@ MonoBehaviour:
   speed: 10
   jumpspeed: 18
   dashingTime: 0.3
+  attackTime: 0.5
   rb: {fileID: 0}
   dashForce: 22
-  collider: {fileID: 0}
   groundCheck: {fileID: 1852823971}
   groundCheckRadius: 0.3
   isGroundLayer:
@@ -551,6 +551,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   inputHoldTime: 0.2
   inputDashTime: 0.2
+  inputAttackTime: 0.5
 --- !u!114 &587330341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -624,6 +625,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 1cdf45b8-7fd6-4f48-bb2a-edaab53ba32a
     m_ActionName: Gameplay/Dash[/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 587330340}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnAttackInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 91ede950-f2ab-4fac-a68f-f8285194dfeb
+    m_ActionName: Gameplay/Attack[/Keyboard/a]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay

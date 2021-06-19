@@ -15,6 +15,12 @@ public class WarriorLandState : WarriorGroundedState
         isLand = true;
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        AnimationFinishTrigger();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -33,6 +39,5 @@ public class WarriorLandState : WarriorGroundedState
             
         }
         
-    }
-    
+    }   
 }

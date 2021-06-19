@@ -5,9 +5,8 @@ using UnityEngine;
 public class WarriorAbilityState : WarriorState
 {
 
-    protected bool isAbilityDone;
+    protected bool isAbilityOn;
     protected bool isGrounded;
-    protected bool isDashing = false;
     public WarriorAbilityState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
@@ -15,13 +14,13 @@ public class WarriorAbilityState : WarriorState
     public override void DoChecks()
     {
         base.DoChecks();
-        player.CheckGround();
+        isGrounded = player.CheckGround();
     }
 
     public override void Enter()
     {
         base.Enter();
-        isAbilityDone = false;
+        isAbilityOn = false;
     }
 
     public override void Exit()
@@ -31,18 +30,19 @@ public class WarriorAbilityState : WarriorState
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
-        if(isAbilityDone)
+        base.LogicUpdate();        
+        if(isAbilityOn)
         {
-            if(isGrounded && player.currentVelocity.y < 0.01f && !isDashing)
+            if(isGrounded && player.currentVelocity.y < 0.01f)
             {
                 stateMachine.ChangeState(player.idleState);
             }
-            else if(!isGrounded && !isDashing)
-            {
+            else if(!isGrounded)
+            {                
                 stateMachine.ChangeState(player.inAirState);
             }
         }
+        
     }
 
     public override void PhysicsUpdate()

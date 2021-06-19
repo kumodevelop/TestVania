@@ -7,10 +7,13 @@ public class WarriorGroundedState : WarriorState
     protected int Xinput;
     protected int Yinput;
     public bool jumpInput;
-    private bool isGrounded;
     public bool dashInput;
+    public bool attackInput;
+    private bool isGrounded;
+    //Verificação para o Player parar de andar
     public bool isLand;
     public bool isCrouch;
+    
     public WarriorGroundedState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
 
@@ -40,6 +43,7 @@ public class WarriorGroundedState : WarriorState
         Yinput = player.inputHandler.normalizeInputY;
         jumpInput = player.inputHandler.jumpInput;
         dashInput = player.inputHandler.dashInput;
+        attackInput = player.inputHandler.attackInput;
 
         if(jumpInput && player.jumpState.CanJump())
         {
@@ -51,19 +55,40 @@ public class WarriorGroundedState : WarriorState
             player.jumpState.DecreaseJumps();
             stateMachine.ChangeState(player.inAirState);
         }
-        else if(dashInput && isGrounded && !isLand)
+        else if (isGrounded)
         {
-            stateMachine.ChangeState(player.dashState);
+            if (Yinput == -1)
+            {
+                isCrouch = true;
+                stateMachine.ChangeState(player.inCrouchState);
+            }
+            else if (Yinput != -1)
+            {
+                isCrouch = false;
+                if (attackInput)
+                    stateMachine.ChangeState(player.attackState);
+                else if (!isLand)
+                {
+                    if (dashInput && !attackInput)
+                        stateMachine.ChangeState(player.dashState);
+                }
+            }
+            
+
         }
-        if(isGrounded && Yinput ==-1)
-        {
-            isCrouch = true;
-            stateMachine.ChangeState(player.inCrouchState);
-        } 
-        else
-        {
-            isCrouch = false;
-        }
+        /* else if(dashInput && isGrounded && !isLand)
+         {
+
+         }
+         if(isGrounded && Yinput ==-1)
+         {
+             isCrouch = true;
+             stateMachine.ChangeState(player.inCrouchState);
+         } 
+         else
+         {
+             isCrouch = false;
+         }*/
     }
 
     public override void PhysicsUpdate()

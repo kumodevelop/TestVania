@@ -21,7 +21,7 @@ public class WarriorInCrouchState : WarriorState
     {
         base.Enter();
         player.SetVelocityX(0f);
-        colliderOffset.Set(0, 0.76f);
+        colliderOffset.Set(0, 0.84f);
         colliderSize.Set(0.73f, 1.46f);
         player.ChangeCollider(colliderOffset, colliderSize);
     }

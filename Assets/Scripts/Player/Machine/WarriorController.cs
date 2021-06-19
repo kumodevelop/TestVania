@@ -9,6 +9,7 @@ public class WarriorController : MonoBehaviour
     public float speed;
     public float jumpspeed;
     public float dashingTime;
+    public float attackTime;
     [HideInInspector]
     public Rigidbody2D rb;
     public PlayerInputHandler inputHandler { get; private set; }
@@ -18,8 +19,7 @@ public class WarriorController : MonoBehaviour
 
     private Vector2 addDashForce;
 
-   // [HideInInspector]
-    public CapsuleCollider2D collider;
+    private CapsuleCollider2D collider;
 
     private float dashStopTime;
     #endregion
@@ -37,7 +37,8 @@ public class WarriorController : MonoBehaviour
 
     public WarriorDashState dashState { get; private set; }
 
-   // public WarriorCrouchState crouchState { get; private set; }
+    public WarriorAttackState attackState { get; private set; }
+    //public WarriorCrouchState crouchState { get; private set; }
 
     #endregion
 
@@ -69,6 +70,8 @@ public class WarriorController : MonoBehaviour
         landState = new WarriorLandState(this, StateMachine, "land");
         dashState = new WarriorDashState(this, StateMachine, "dash");
         inCrouchState = new WarriorInCrouchState(this, StateMachine, "crouch");
+        attackState = new WarriorAttackState(this, StateMachine, "attack1");
+        //crouchState = new WarriorCrouchState(this, StateMachine, "crouch");
         facingDirection = 1;
                 
     }
@@ -157,7 +160,11 @@ public class WarriorController : MonoBehaviour
     {
         StateMachine.CurrentState.AnimationFinishTrigger();
     }
-
+    public void attackVelocity()
+    {
+        addDashForce.Set(0.2f * facingDirection, 0);
+        rb.velocity = addDashForce;
+    }
     #endregion
 
   

@@ -18,10 +18,8 @@ public class WarriorDashState : WarriorAbilityState
     public override void Enter()
     {
         base.Enter();
-        Debug.Log("Cheguei no State");
-        isAbilityDone = true;
-        isDashing = true;
-        player.SetVelocityX(0f);
+        //isDashing = true;
+        //player.SetVelocityX(0f);
         player.SetDash();
         startDashingTime = Time.time;
     }
@@ -34,16 +32,14 @@ public class WarriorDashState : WarriorAbilityState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-
         StopDashing();
-
-
     }
     private void StopDashing()
     {
         if(Time.time >= startDashingTime+player.dashingTime)
         {
             player.StopDash();
+            isAbilityOn = true;
             stateMachine.ChangeState(player.landState);
         }
     }

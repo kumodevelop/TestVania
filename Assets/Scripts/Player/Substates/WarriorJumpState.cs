@@ -14,7 +14,7 @@ public class WarriorJumpState : WarriorAbilityState
     {
         base.Enter();
         player.SetVelocityY(player.jumpspeed);
-        isAbilityDone = true;
+        isAbilityOn = true;
         jumpsleft--;
         player.inAirState.setIsJumping();
     }

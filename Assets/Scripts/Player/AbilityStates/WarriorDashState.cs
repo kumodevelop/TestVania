@@ -18,6 +18,7 @@ public class WarriorDashState : WarriorAbilityState
     public override void Enter()
     {
         base.Enter();
+        isDashing = true;
         //isDashing = true;
         //player.SetVelocityX(0f);
         player.SetDash();

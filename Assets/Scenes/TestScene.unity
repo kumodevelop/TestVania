@@ -527,7 +527,6 @@ MonoBehaviour:
   speed: 10
   jumpspeed: 18
   dashingTime: 0.3
-  attackTime: 0.5
   rb: {fileID: 0}
   dashForce: 22
   groundCheck: {fileID: 1852823971}
@@ -549,9 +548,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d64bb7099571be4f9334c612f378462, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canUseInput: 1
   inputHoldTime: 0.2
   inputDashTime: 0.2
-  inputAttackTime: 0.5
+  inputAttackTime: 0.3
+  attackInputStartTime: 0
+  attackInputTime: 1
 --- !u!114 &587330341
 MonoBehaviour:
   m_ObjectHideFlags: 0

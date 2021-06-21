@@ -22,7 +22,7 @@ The Final project is going to contain:</p>
 <li>Double Jump ✔</li>
 <li>Crouch ✔</li>
 <li>Dash ✔</li>
-<li>Attack Combo</li>
+<li>Attack Combo ✔</li>
 <li>Air Attack</li>
 <li>Crouch Attack</li>
 <li>Get Hit</li>

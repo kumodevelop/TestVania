@@ -12,7 +12,7 @@ public class WarriorState
 
     protected float startTime;
 
-    private string animBoolName;
+    public string animBoolName;
 
     protected bool isAnimationFinish = false;
 

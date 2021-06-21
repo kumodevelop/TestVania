@@ -6,24 +6,20 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     #region Input Variables
+    public bool canUseInput = true;
     public Vector2 RawMovementInput { get; private set; }
     public int normalizeInputX { get; private set; }
     public int normalizeInputY { get; private set; }
     public bool jumpInput { get; private set; }
-
     public bool crouchInput { get; private set; }
-
     public bool dashInput { get; private set; }
-
-    public bool attackInput { get; private set; }
-
     public bool jumpInputStop { get; private set; }
 
-    public bool dashInputStop { get; private set; }
-
-    public bool attackInputStop { get; private set; }
-
+    public int contAttacks = 0;
     
+
+   // public bool dashInputStop { get; private set; }
+
     #endregion
 
     #region Hold Time Variables
@@ -38,7 +34,22 @@ public class PlayerInputHandler : MonoBehaviour
 
     public float inputAttackTime;
 
-    private float attackInputStartTime;
+
+
+
+
+    public bool attackInput;
+
+    public float attackInputStartTime;
+    public float attackInputTime;
+    
+
+
+
+
+
+
+
 
     #endregion
 
@@ -50,7 +61,16 @@ public class PlayerInputHandler : MonoBehaviour
 
         CheckCrouch();
 
-        CheckAttackTime();
+        CheckAttack();       
+
+        if(attackInput)
+        {
+            StartCoroutine(ResetAttackButton());
+        }
+
+        //Debug.Log("CanUseInput = " + canUseInput);
+        //Debug.Log("attackInput = " + attackInput);
+        //Debug.Log(contAttacks);
     }
 
     public void useJumpInput()
@@ -72,6 +92,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (Time.time >= dashInputStartTime + inputDashTime)
         {
             dashInput = false;
+           // canUseInput = true;
             
         }
     }
@@ -88,11 +109,12 @@ public class PlayerInputHandler : MonoBehaviour
         }
     }
 
-    private void CheckAttackTime()
+    public void CheckAttack()
     {
-        if (Time.time >= attackInputStartTime + inputAttackTime)
+        if(Time.time >=attackInputStartTime+attackInputTime)
         {
             attackInput = false;
+            canUseInput = true;
         }
     }
     #endregion
@@ -128,7 +150,7 @@ public class PlayerInputHandler : MonoBehaviour
         if(context.started)
         {
             jumpInput = true;
-            jumpInputStop = false;
+            jumpInputStop = false;           
             jumpInputStartTime = Time.time;
         }
 
@@ -136,16 +158,19 @@ public class PlayerInputHandler : MonoBehaviour
         {
             jumpInputStop = true;
         }
+        
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(context.started) //&& canUseInput)
         {
+            canUseInput = false;
             dashInput = true;
             //dashInputStop = false;
             dashInputStartTime = Time.time;
-            CheckAttackTime();
+            StartCoroutine(ResetInputButton());
+
         }
         if (context.canceled)
         {
@@ -158,19 +183,40 @@ public class PlayerInputHandler : MonoBehaviour
     {
         if (context.started)
         {
-            attackInput = true;
-            //attackInputStop = false;
+            if(canUseInput && !attackInput)
+            {
+                Debug.Log("tá rodando");
+                attackInput = true;
+                canUseInput = false;
+                contAttacks++;
+                StartCoroutine(ResetInputButton());
+            }
+            
+            /*else if(canUseInput && attackInput)
+            {
+                attackInput = true;
+                canUseInput = false;
+                contAttacks++;
+                //StopCoroutine(ResetAttackButton());
+                StartCoroutine(ResetInputButton());
+            }*/
+            
             attackInputStartTime = Time.time;
-        }           
-        if (context.canceled)
-        {
-            attackInput = false;
-        }
-           // attackInput = false;
+        }       
+    }
+
+    IEnumerator ResetInputButton()
+    {
+        yield return new WaitForSeconds(0.1f);
+        canUseInput = true;
+    }
+
+    IEnumerator ResetAttackButton()
+    {
+        yield return new WaitForSeconds(0.1f);
+        attackInput = false;
+ //       yield return new WaitForSeconds(0.8f);
     }
     #endregion
-
-    
-
 
 }

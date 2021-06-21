@@ -9,7 +9,7 @@ public class WarriorController : MonoBehaviour
     public float speed;
     public float jumpspeed;
     public float dashingTime;
-    public float attackTime;
+    
     [HideInInspector]
     public Rigidbody2D rb;
     public PlayerInputHandler inputHandler { get; private set; }
@@ -19,7 +19,7 @@ public class WarriorController : MonoBehaviour
 
     private Vector2 addDashForce;
 
-    private CapsuleCollider2D collider;
+    private CapsuleCollider2D playerCollider;
 
     private float dashStopTime;
     #endregion
@@ -38,6 +38,9 @@ public class WarriorController : MonoBehaviour
     public WarriorDashState dashState { get; private set; }
 
     public WarriorAttackState attackState { get; private set; }
+    public WarriorAttackState attackState2 { get; private set; }
+
+    public WarriorAttackState attackState3 { get; private set; }
     //public WarriorCrouchState crouchState { get; private set; }
 
     #endregion
@@ -71,14 +74,20 @@ public class WarriorController : MonoBehaviour
         dashState = new WarriorDashState(this, StateMachine, "dash");
         inCrouchState = new WarriorInCrouchState(this, StateMachine, "crouch");
         attackState = new WarriorAttackState(this, StateMachine, "attack1");
+        attackState2 = new WarriorAttackState(this, StateMachine, "attack2");
+        attackState3 = new WarriorAttackState(this, StateMachine, "attack3");
         //crouchState = new WarriorCrouchState(this, StateMachine, "crouch");
         facingDirection = 1;
                 
     }
-   
+
+    public void changeAttackAnimation(string animationName)
+    {
+        attackState = new WarriorAttackState(this, StateMachine, animationName);
+    }
     private void Start()
     {
-        collider = GetComponent<CapsuleCollider2D>();
+        playerCollider = GetComponent<CapsuleCollider2D>();
         rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();       
         inputHandler = GetComponent<PlayerInputHandler>();
@@ -88,13 +97,14 @@ public class WarriorController : MonoBehaviour
 
     public void ChangeCollider(Vector2 offsetnew,Vector2 sizenew)
     {
-        collider.offset = offsetnew;
-        collider.size = sizenew;
+        playerCollider.offset = offsetnew;
+        playerCollider.size = sizenew;
     }
 
     
     private void Update()
     {
+       // Debug.Log(attacksleft);
         currentVelocity = rb.velocity;
         StateMachine.CurrentState.LogicUpdate();
     }

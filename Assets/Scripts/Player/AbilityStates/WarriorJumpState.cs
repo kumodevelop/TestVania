@@ -13,7 +13,7 @@ public class WarriorJumpState : WarriorAbilityState
     public override void Enter()
     {
         base.Enter();
-        player.SetVelocityY(player.jumpspeed);
+        player.SetVelocityY(player.generalData.jumpspeed);
         isAbilityOn = true;
         jumpsleft--;
         player.inAirState.setIsJumping();

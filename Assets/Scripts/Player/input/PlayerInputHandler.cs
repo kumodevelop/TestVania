@@ -6,51 +6,32 @@ using UnityEngine.InputSystem;
 public class PlayerInputHandler : MonoBehaviour
 {
     #region Input Variables
-    public bool canUseInput = true;
+    public bool canUseInput { get; private set; } = true;
     public Vector2 RawMovementInput { get; private set; }
     public int normalizeInputX { get; private set; }
     public int normalizeInputY { get; private set; }
     public bool jumpInput { get; private set; }
     public bool crouchInput { get; private set; }
     public bool dashInput { get; private set; }
-    public bool jumpInputStop { get; private set; }
-
-    public int contAttacks = 0;
     
+    public bool attackInput { get; private set; }
 
-   // public bool dashInputStop { get; private set; }
 
     #endregion
 
     #region Hold Time Variables
-
-    public float inputHoldTime;
-    
+    //Jump
+    public float inputHoldTime;   
     private float jumpInputStartTime;
+    public bool jumpInputStop { get; private set; }
 
+    //Dash
     public float inputDashTime;
 
     private float dashInputStartTime;
-
-    public float inputAttackTime;
-
-
-
-
-
-    public bool attackInput;
-
-    public float attackInputStartTime;
-    public float attackInputTime;
-    
-
-
-
-
-
-
-
-
+    //Basic Attack
+    private float attackInputStartTime;
+    private float attackInputTime;
     #endregion
 
     private void Update()
@@ -67,10 +48,6 @@ public class PlayerInputHandler : MonoBehaviour
         {
             StartCoroutine(ResetAttackButton());
         }
-
-        //Debug.Log("CanUseInput = " + canUseInput);
-        //Debug.Log("attackInput = " + attackInput);
-        //Debug.Log(contAttacks);
     }
 
     public void useJumpInput()
@@ -92,8 +69,6 @@ public class PlayerInputHandler : MonoBehaviour
         if (Time.time >= dashInputStartTime + inputDashTime)
         {
             dashInput = false;
-           // canUseInput = true;
-            
         }
     }
 
@@ -157,8 +132,7 @@ public class PlayerInputHandler : MonoBehaviour
         if (context.canceled)
         {
             jumpInputStop = true;
-        }
-        
+        }        
     }
 
     public void OnDashInput(InputAction.CallbackContext context)
@@ -172,11 +146,6 @@ public class PlayerInputHandler : MonoBehaviour
             StartCoroutine(ResetInputButton());
 
         }
-        if (context.canceled)
-        {
-            //dashInputStop = true;
-        }
-
     }
 
     public void OnAttackInput(InputAction.CallbackContext context)
@@ -185,22 +154,10 @@ public class PlayerInputHandler : MonoBehaviour
         {
             if(canUseInput && !attackInput)
             {
-                Debug.Log("tá rodando");
                 attackInput = true;
                 canUseInput = false;
-                contAttacks++;
                 StartCoroutine(ResetInputButton());
-            }
-            
-            /*else if(canUseInput && attackInput)
-            {
-                attackInput = true;
-                canUseInput = false;
-                contAttacks++;
-                //StopCoroutine(ResetAttackButton());
-                StartCoroutine(ResetInputButton());
-            }*/
-            
+            }           
             attackInputStartTime = Time.time;
         }       
     }
@@ -215,7 +172,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         attackInput = false;
- //       yield return new WaitForSeconds(0.8f);
     }
     #endregion
 

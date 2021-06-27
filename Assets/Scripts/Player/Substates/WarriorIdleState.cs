@@ -10,11 +10,6 @@ public class WarriorIdleState : WarriorGroundedState
 
     }
 
-    public override void DoChecks()
-    {
-        base.DoChecks();
-    }
-
     public override void Enter()
     {
         base.Enter();
@@ -23,11 +18,6 @@ public class WarriorIdleState : WarriorGroundedState
         colliderSize.Set(0.73f, 1.94f);
         player.ChangeCollider(colliderOffset, colliderSize);
         
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
     }
 
     public override void LogicUpdate()
@@ -39,10 +29,5 @@ public class WarriorIdleState : WarriorGroundedState
         {
             stateMachine.ChangeState(player.walkState);            
         }
-    }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
     }
 }

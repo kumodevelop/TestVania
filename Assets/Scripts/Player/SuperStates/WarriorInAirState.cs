@@ -20,16 +20,6 @@ public class WarriorInAirState : WarriorState
         isGround = player.CheckGround();
     }
 
-    public override void Enter()
-    {
-        base.Enter();
-    }
-
-    public override void Exit()
-    {
-        base.Exit();
-    }  
-
     public override void LogicUpdate()
     {
         base.LogicUpdate();
@@ -48,17 +38,12 @@ public class WarriorInAirState : WarriorState
         else
         {
             player.CheckFlip(xInput);
-            player.SetVelocityX(player.speed * xInput);
+            player.SetVelocityX(player.generalData.speed * xInput);
 
             player.Anim.SetFloat("yVelocity", player.currentVelocity.y);
         }
     }
-
-    public override void PhysicsUpdate()
-    {
-        base.PhysicsUpdate();
-    }
-
+    
     private void CheckJumpMultiplier()
     {
         if (isJumping)

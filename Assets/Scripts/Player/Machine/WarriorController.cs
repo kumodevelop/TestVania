@@ -5,41 +5,44 @@ using UnityEngine;
 public class WarriorController : MonoBehaviour
 {
     #region Others
-    [Header("hitBox")]
-    public GameObject hitBox;
-    public bool test;
-    private float dashStopTime;
-    private string currentAttribute;
-
+    [Header("Variables")]
+    public float speed;
+    public float jumpspeed;
+    public float dashingTime;
+    
     [HideInInspector]
     public Rigidbody2D rb;
-    [HideInInspector]
-    //public DamageEffects.Effects currentBuff;
-    
-    //Other Scripts
     public PlayerInputHandler inputHandler { get; private set; }
-    public GeneralData generalData { get; private set; }
-
-    //Components
-    private CapsuleCollider2D playerCollider;
     public Animator Anim { get; private set; }
-    
+
+    public float dashForce;
+
     private Vector2 addDashForce;
-    
+
+    private CapsuleCollider2D playerCollider;
+
+    private float dashStopTime;
     #endregion
 
     #region StateMachines
     public WarriorStateMachine StateMachine { get; private set; }
     public WarriorIdleState idleState { get; private set; }
     public WarriorWalkState walkState { get; private set; }
+
     public WarriorJumpState jumpState { get; private set; }
+
     public WarriorInAirState inAirState { get; private set; }
     public WarriorInCrouchState inCrouchState { get; private set; }
     public WarriorLandState landState { get; private set; }
+
     public WarriorDashState dashState { get; private set; }
+
     public WarriorAttackState attackState { get; private set; }
     public WarriorAttackState attackState2 { get; private set; }
-    public WarriorAttackState attackState3 { get; private set; }       
+
+    public WarriorAttackState attackState3 { get; private set; }
+    //public WarriorCrouchState crouchState { get; private set; }
+
     #endregion
 
     #region WalkVariables
@@ -73,12 +76,15 @@ public class WarriorController : MonoBehaviour
         attackState = new WarriorAttackState(this, StateMachine, "attack1");
         attackState2 = new WarriorAttackState(this, StateMachine, "attack2");
         attackState3 = new WarriorAttackState(this, StateMachine, "attack3");
-        generalData = GetComponent<GeneralData>();
-        generalData.currentBuff = DamageEffects.Effects.normal;
+        //crouchState = new WarriorCrouchState(this, StateMachine, "crouch");
         facingDirection = 1;
                 
     }
 
+    public void changeAttackAnimation(string animationName)
+    {
+        attackState = new WarriorAttackState(this, StateMachine, animationName);
+    }
     private void Start()
     {
         playerCollider = GetComponent<CapsuleCollider2D>();
@@ -98,12 +104,7 @@ public class WarriorController : MonoBehaviour
     
     private void Update()
     {
-        if(test)
-        {
-            generalData.currentBuff = DamageEffects.Effects.poison;
-            Debug.Log("Your damage effect is " + generalData.currentBuff);
-
-        }
+       // Debug.Log(attacksleft);
         currentVelocity = rb.velocity;
         StateMachine.CurrentState.LogicUpdate();
     }
@@ -131,7 +132,7 @@ public class WarriorController : MonoBehaviour
     
     public void SetDash()
     {
-        addDashForce.Set(generalData.dashForce * facingDirection, 0);
+        addDashForce.Set(dashForce * facingDirection, 0);
         rb.velocity = addDashForce;
     }
 
@@ -148,6 +149,7 @@ public class WarriorController : MonoBehaviour
             Turning();
         }
     }
+
     private void Turning()
     {
         facingDirection *= -1;
@@ -173,22 +175,9 @@ public class WarriorController : MonoBehaviour
         addDashForce.Set(0.2f * facingDirection, 0);
         rb.velocity = addDashForce;
     }
-
-    public void ActivateHit()
-    {
-        if (hitBox.activeSelf)     
-            hitBox.SetActive(false);
-        
-        hitBox.SetActive(true);
-        StartCoroutine(EndHit());
-        
-    }
-
-    IEnumerator EndHit()
-    {
-        yield return new WaitForSeconds(0.07f);
-        hitBox.SetActive(false);
-    }
     #endregion
+
+  
+
 
 }

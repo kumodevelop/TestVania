@@ -5,17 +5,29 @@ using UnityEngine;
 public class WarriorDashState : WarriorAbilityState
 {
     private float startDashingTime;
-    
+
     public WarriorDashState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
+    }
+
+    public override void DoChecks()
+    {
+        base.DoChecks();
     }
 
     public override void Enter()
     {
         base.Enter();
         isDashing = true;
+        //isDashing = true;
+        //player.SetVelocityX(0f);
         player.SetDash();
         startDashingTime = Time.time;
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
     }
 
     public override void LogicUpdate()
@@ -25,7 +37,7 @@ public class WarriorDashState : WarriorAbilityState
     }
     private void StopDashing()
     {
-        if(Time.time >= startDashingTime+player.generalData.dashingTime)
+        if(Time.time >= startDashingTime+player.dashingTime)
         {
             player.StopDash();
             isAbilityOn = true;

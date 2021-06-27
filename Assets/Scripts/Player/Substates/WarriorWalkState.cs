@@ -9,11 +9,26 @@ public class WarriorWalkState : WarriorGroundedState
 
     }
 
+    public override void DoChecks()
+    {
+        base.DoChecks();
+    }
+
+    public override void Enter()
+    {
+        base.Enter();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+    }
+
     public override void LogicUpdate()
     {
         base.LogicUpdate();
         if(!dashInput && !isCrouch &&!attackInput)
-        player.SetVelocityX(player.generalData.speed * Xinput);
+        player.SetVelocityX(player.speed * Xinput);
 
         if(Xinput==0)
         {

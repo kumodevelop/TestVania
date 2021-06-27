@@ -68,8 +68,9 @@ public class WarriorGroundedState : WarriorState
             else if (Yinput != -1)
             {
                 isCrouch = false;
-                if (attackInput)
-                {
+                if (attackInput)// && player.inputHandler.contAttacks<=3)
+                {                    
+                    //Debug.Log(player.attackState.ShowAttacksLeft());
                     stateMachine.ChangeState(player.attackState);
                 }
                 else if (!isLand)

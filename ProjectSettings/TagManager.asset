@@ -5,7 +5,6 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
-  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -16,7 +15,7 @@ TagManager:
   - NormalGround
   - Player
   - Enemy
-  - Weapon
+  - 
   - 
   - 
   - 

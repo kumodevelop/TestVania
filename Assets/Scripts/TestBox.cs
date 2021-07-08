@@ -6,12 +6,12 @@ public class TestBox : MonoBehaviour, IDamageable
 {
     public int hitsToBreak;
     private Animator anim;
-    private BoxCollider2D collider;
+    private BoxCollider2D bCollider;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        collider = GetComponent<BoxCollider2D>();
+        bCollider = GetComponent<BoxCollider2D>();
     }
 
     public void Damage(float damaged)
@@ -40,7 +40,7 @@ public class TestBox : MonoBehaviour, IDamageable
     }
     public void DestroySelf()
     {
-        Destroy(collider);
+        Destroy(bCollider);
         Destroy(gameObject);
     }
 }

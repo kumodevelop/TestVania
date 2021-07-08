@@ -25,7 +25,7 @@ The Final project is going to contain:</p>
 <li>Attack Combo ✔</li>
 <li>Air Attack</li>
 <li>Crouch Attack</li>
-<li>Get Hit</li>
+<li>Get Hit ✔</li>
 <li>Die</li>
 <li>Input Handler ✔</li>
 </ul>

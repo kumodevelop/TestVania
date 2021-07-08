@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarriorController : MonoBehaviour
+public class WarriorController : MonoBehaviour, IDamageable
 {
     #region Others
     [Header("hitBox")]
@@ -13,7 +13,14 @@ public class WarriorController : MonoBehaviour
 
     [HideInInspector]
     public Rigidbody2D rb;
+   // [HideInInspector]
+    public bool isTakingDamage;
+    public bool isInvincible;
+    public float invincibleTime;
+
     [HideInInspector]
+    public bool blink;
+    private bool executeBlink;
     //public DamageEffects.Effects currentBuff;
     
     //Other Scripts
@@ -25,6 +32,8 @@ public class WarriorController : MonoBehaviour
     public Animator Anim { get; private set; }
     
     private Vector2 addDashForce;
+
+    private SpriteRenderer spr;
     
     #endregion
 
@@ -40,6 +49,7 @@ public class WarriorController : MonoBehaviour
     public WarriorAttackState attackState { get; private set; }
     public WarriorAttackState attackState2 { get; private set; }
     public WarriorAttackState attackState3 { get; private set; }       
+    public WarriorGetHurtState getHurtState { get; private set; }
     #endregion
 
     #region WalkVariables
@@ -73,9 +83,13 @@ public class WarriorController : MonoBehaviour
         attackState = new WarriorAttackState(this, StateMachine, "attack1");
         attackState2 = new WarriorAttackState(this, StateMachine, "attack2");
         attackState3 = new WarriorAttackState(this, StateMachine, "attack3");
+        getHurtState = new WarriorGetHurtState(this, StateMachine, "hurt");
         generalData = GetComponent<GeneralData>();
         generalData.currentBuff = DamageEffects.Effects.normal;
+        spr = GetComponent<SpriteRenderer>();
         facingDirection = 1;
+        isTakingDamage = false;
+        executeBlink = true;
                 
     }
 
@@ -104,9 +118,18 @@ public class WarriorController : MonoBehaviour
             Debug.Log("Your damage effect is " + generalData.currentBuff);
 
         }
+        //if (isInvincible)
+          //  blink = true;
+
+        if(blink)
+        {
+            if(executeBlink)
+            StartCoroutine(BlinkTime());
+        }
         currentVelocity = rb.velocity;
         StateMachine.CurrentState.LogicUpdate();
     }
+    
 
     private void FixedUpdate()
     {
@@ -174,14 +197,55 @@ public class WarriorController : MonoBehaviour
         rb.velocity = addDashForce;
     }
 
+    public void GetHitVelocity()
+    {
+        StopDash();
+        Vector2 teste = new Vector2(-60f*facingDirection, 0);
+        rb.AddForce(teste);
+    }
+
     public void ActivateHit()
     {
         if (hitBox.activeSelf)     
             hitBox.SetActive(false);
         
         hitBox.SetActive(true);
-        StartCoroutine(EndHit());
-        
+        StartCoroutine(EndHit());       
+    }    
+
+    public void disableInvincible(float time)
+    {
+        StartCoroutine(timeDisableInvincible(time));
+    }
+
+    public void Damage(float damaged)
+    {
+        if(!isTakingDamage && !isInvincible)
+        isTakingDamage = true;
+    }
+
+    public void Destroying()
+    {
+    }
+    #endregion
+
+    #region Timers
+    IEnumerator BlinkTime()
+    {
+        executeBlink = false;
+        Color oldColor = spr.color;
+        spr.color = new Color(255, 255, 255, 0);
+        yield return new WaitForSeconds(0.1f);
+        spr.color = oldColor;
+        yield return new WaitForSeconds(0.1f);
+        executeBlink = true;
+    }
+
+    IEnumerator timeDisableInvincible(float time)
+    {
+        yield return new WaitForSeconds(time);
+        isInvincible = false;
+        blink = false;
     }
 
     IEnumerator EndHit()
@@ -189,6 +253,7 @@ public class WarriorController : MonoBehaviour
         yield return new WaitForSeconds(0.07f);
         hitBox.SetActive(false);
     }
+
     #endregion
 
 }

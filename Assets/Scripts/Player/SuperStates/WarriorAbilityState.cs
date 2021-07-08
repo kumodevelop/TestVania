@@ -31,8 +31,9 @@ public class WarriorAbilityState : WarriorState
 
     public override void LogicUpdate()
     {
-        base.LogicUpdate();        
-        if(isAbilityOn)
+        base.LogicUpdate();
+       
+        if (isAbilityOn)
         {
             isDashing = false;
             if(isGrounded && player.currentVelocity.y < 0.01f)

@@ -9,7 +9,8 @@ public class WarriorInAirState : WarriorState
     private bool jumpInput;
     private bool isJumping;
     private bool jumpInputStop;
-    
+    public bool getHurt;
+
     public WarriorInAirState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
     }
@@ -26,8 +27,14 @@ public class WarriorInAirState : WarriorState
         xInput = player.inputHandler.normalizeInputX;
         jumpInput = player.inputHandler.jumpInput;
         jumpInputStop = player.inputHandler.jumpInputStop;
+        getHurt = player.isTakingDamage;
         CheckJumpMultiplier();
-        if(isGround && player.currentVelocity.y < 0.01f)
+
+        if (player.isTakingDamage && !player.isInvincible)
+        {
+            //stateMachine.ChangeState(player.getHurtState);
+        }        
+        else if (isGround && player.currentVelocity.y < 0.01f)
         {
             stateMachine.ChangeState(player.landState);
         }
@@ -42,6 +49,7 @@ public class WarriorInAirState : WarriorState
 
             player.Anim.SetFloat("yVelocity", player.currentVelocity.y);
         }
+        
     }
     
     private void CheckJumpMultiplier()

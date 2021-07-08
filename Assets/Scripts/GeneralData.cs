@@ -10,8 +10,20 @@ public class GeneralData : MonoBehaviour
     public float jumpspeed;
     public float dashingTime;
     public float dashForce;
-    public DamageEffects.Effects currentBuff;
     public bool isBox;
+    [HideInInspector]
+    public DamageEffects.Effects currentBuff;
+    
+    private void Awake()
+    {       
+        currentBuff = DamageEffects.Effects.normal;
+        
+    }
+
+    private void Update()
+    {
+
+    }
 
 
 }

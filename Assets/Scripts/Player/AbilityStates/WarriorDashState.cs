@@ -14,22 +14,31 @@ public class WarriorDashState : WarriorAbilityState
     {
         base.Enter();
         isDashing = true;
+        Debug.Log("Entrei do Dash");
         player.SetDash();
         startDashingTime = Time.time;
     }
 
+    public override void Exit()
+    {
+        base.Exit();
+        player.StopDash();
+        //isAbilityOn = true;
+
+    }
+
     public override void LogicUpdate()
     {
-        base.LogicUpdate();
+        base.LogicUpdate();      
         StopDashing();
+     
     }
     private void StopDashing()
     {
         if(Time.time >= startDashingTime+player.generalData.dashingTime)
         {
-            player.StopDash();
             isAbilityOn = true;
-            stateMachine.ChangeState(player.landState);
+            //stateMachine.ChangeState(player.idleState);
         }
     }
 }

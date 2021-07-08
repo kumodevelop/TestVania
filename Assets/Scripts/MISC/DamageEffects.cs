@@ -24,8 +24,6 @@ public class DamageEffects
         else if(hurting.isBox)
         {
             receiveDamage.GetComponent<IDamageable>().Destroying();
-        }
-     
-    }
-    
+        }     
+    }    
 }

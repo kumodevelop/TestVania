@@ -15,6 +15,7 @@ public class WarriorGroundedState : WarriorState
     //Verificação para o Player parar de andar
     public bool isLand;
     public bool isCrouch;
+    public bool getHurt;
     
     public WarriorGroundedState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
     {
@@ -47,8 +48,10 @@ public class WarriorGroundedState : WarriorState
         dashInput = player.inputHandler.dashInput;
         attackInput = player.inputHandler.attackInput;
         canUseInput = player.inputHandler.canUseInput;
+        getHurt = player.isTakingDamage;
+       
 
-        if(jumpInput && player.jumpState.CanJump())
+        if (jumpInput && player.jumpState.CanJump())
         {
             player.inputHandler.useJumpInput();
             stateMachine.ChangeState(player.jumpState);

@@ -13,8 +13,8 @@ public class WarriorWalkState : WarriorGroundedState
     {
         base.LogicUpdate();
         if(!dashInput && !isCrouch &&!attackInput)
-        player.SetVelocityX(player.generalData.speed * Xinput);
-
+         player.SetVelocityX(player.generalData.speed * Xinput);
+        
         if(Xinput==0)
         {
             stateMachine.ChangeState(player.idleState);

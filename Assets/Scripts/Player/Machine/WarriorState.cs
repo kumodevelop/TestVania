@@ -28,7 +28,6 @@ public class WarriorState
         DoChecks();
         startTime = Time.time;
         player.Anim.SetBool(animBoolName, true);
-        //Debug.Log(animBoolName);
         isAnimationFinish = false;       
     }
 
@@ -39,6 +38,11 @@ public class WarriorState
 
     public virtual void LogicUpdate()
     {
+        if (player.isTakingDamage && !player.isInvincible)
+        {
+            player.isTakingDamage = false;
+            stateMachine.ChangeState(player.getHurtState);
+        }
 
     }
 

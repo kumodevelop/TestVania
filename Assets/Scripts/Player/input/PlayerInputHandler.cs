@@ -12,7 +12,7 @@ public class PlayerInputHandler : MonoBehaviour
     public int normalizeInputY { get; private set; }
     public bool jumpInput { get; private set; }
     public bool crouchInput { get; private set; }
-    public bool dashInput { get; private set; }
+    public bool dashInput;// { get; private set; }
     
     public bool attackInput { get; private set; }
 

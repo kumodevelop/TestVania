@@ -17,6 +17,8 @@ public class WarriorGetHurtState : WarriorDamageState
     public override void Enter()
     {
         base.Enter();
+        player.disableInvincible(2f,0);
+        player.blink = true;
         startHurtTime = Time.time;
     }
 

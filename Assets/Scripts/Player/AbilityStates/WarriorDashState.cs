@@ -14,7 +14,7 @@ public class WarriorDashState : WarriorAbilityState
     {
         base.Enter();
         isDashing = true;
-        Debug.Log("Entrei do Dash");
+        player.disableInvincible(0.1f,1);
         player.SetDash();
         startDashingTime = Time.time;
     }

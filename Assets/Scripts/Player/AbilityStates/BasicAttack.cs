@@ -11,6 +11,8 @@ public class BasicAttack : MonoBehaviour
     {
         anim = transform.parent.GetComponent<Animator>();
     }
+
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         IDamageable damaging = collision.GetComponent<IDamageable>();

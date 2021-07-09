@@ -213,9 +213,9 @@ public class WarriorController : MonoBehaviour, IDamageable
         StartCoroutine(EndHit());       
     }    
 
-    public void disableInvincible(float time)
+    public void disableInvincible(float time,int ext)
     {
-        StartCoroutine(timeDisableInvincible(time));
+        StartCoroutine(timeDisableInvincible(time,ext));
     }
 
     public void Damage(float damaged)
@@ -241,11 +241,32 @@ public class WarriorController : MonoBehaviour, IDamageable
         executeBlink = true;
     }
 
-    IEnumerator timeDisableInvincible(float time)
+    IEnumerator timeDisableInvincible(float time,int isExiting)
     {
+        isInvincible = true;
         yield return new WaitForSeconds(time);
+        //0 - deactivate blink (used by getHurtState)
+        //1 - Don't desactivate isInvincible if character was already invincible and blinking. (used by Dash State)
+        if (isExiting == 0)
+        {
+            EndHurtTime();
+        }
+        else if(isExiting==1)
+        {
+            EndDashInvincibility();
+        }       
+    }
+
+    private void EndHurtTime()
+    {
         isInvincible = false;
         blink = false;
+    }
+
+    private void EndDashInvincibility()
+    {
+        if (!blink)
+            isInvincible = false;
     }
 
     IEnumerator EndHit()

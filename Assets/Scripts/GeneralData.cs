@@ -5,6 +5,7 @@ using UnityEngine;
 public class GeneralData : MonoBehaviour
 {
     public float hp;
+    public float fullhp;
     public float mp;
     public float speed;
     public float jumpspeed;

@@ -40,7 +40,7 @@ The Final project is going to contain:</p>
 </ul>
 <p><strong>UI</strong></p>
 <ul>
-<li>HP Bar</li>
+<li>HP Bar ✔</li>
 <li>Energy Bar</li>
 <li>Dialog Boxes</li>
 </ul>
@@ -64,7 +64,8 @@ A Key - Attack</p>
 PixelArt 2D Style<br>
 <em>Assets:</em><br>
 <a href="https://clembod.itch.io/warrior-free-animation-set">https://clembod.itch.io/warrior-free-animation-set</a><br>
-<a href="https://anokolisa.itch.io/high-forest-assets-pack">https://anokolisa.itch.io/high-forest-assets-pack</a></p>
+<a href="https://anokolisa.itch.io/high-forest-assets-pack">https://anokolisa.itch.io/high-forest-assets-pack</a></br>
+<a href="https://www.gamedevmarket.net/asset/heart-and-health-bar/">https://www.gamedevmarket.net/asset/heart-and-health-bar/</a></p>
 <p><strong>developed by:</strong> Kumodevelop</p>
 </div>
 </body>

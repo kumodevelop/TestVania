@@ -17,6 +17,7 @@ public class WarriorController : MonoBehaviour, IDamageable
     public bool isTakingDamage;
     public bool isInvincible;
     public float invincibleTime;
+    private Ghost ghostMode;
 
     [HideInInspector]
     public bool blink;
@@ -72,7 +73,6 @@ public class WarriorController : MonoBehaviour, IDamageable
     private void Awake()
     {
         StateMachine = new WarriorStateMachine();
-
         idleState = new WarriorIdleState(this, StateMachine, "idle");
         walkState = new WarriorWalkState(this, StateMachine, "walk");
         jumpState = new WarriorJumpState(this, StateMachine, "inAir");
@@ -87,6 +87,7 @@ public class WarriorController : MonoBehaviour, IDamageable
         generalData = GetComponent<GeneralData>();
         generalData.currentBuff = DamageEffects.Effects.normal;
         spr = GetComponent<SpriteRenderer>();
+        ghostMode = GetComponent<Ghost>();
         facingDirection = 1;
         isTakingDamage = false;
         executeBlink = true;
@@ -101,6 +102,16 @@ public class WarriorController : MonoBehaviour, IDamageable
         inputHandler = GetComponent<PlayerInputHandler>();
         StateMachine.Initialize(idleState);
         
+    }
+
+    public void ActivateGhostMode()
+    {
+        ghostMode.activeGhost = true;
+    }
+
+    public void DeactivateGhostMode()
+    {
+        ghostMode.activeGhost = false;
     }
 
     public void ChangeCollider(Vector2 offsetnew,Vector2 sizenew)
@@ -221,7 +232,11 @@ public class WarriorController : MonoBehaviour, IDamageable
     public void Damage(float damaged)
     {
         if(!isTakingDamage && !isInvincible)
-        isTakingDamage = true;
+        {
+            isTakingDamage = true;
+            generalData.hp -= damaged;
+        }
+        
     }
 
     public void Destroying()

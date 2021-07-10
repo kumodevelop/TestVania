@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private static GameManager gm;
-    private float playerHP;
+    public float playerHP = 100;
 
     public static GameManager GetInstance()
     {
@@ -23,6 +23,15 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void setPlayerHP(float newHP)
+    {
+        playerHP = newHP;
+    }
+    public float getPlayerHP()
+    {
+        return playerHP;
     }
 
     // Update is called once per frame

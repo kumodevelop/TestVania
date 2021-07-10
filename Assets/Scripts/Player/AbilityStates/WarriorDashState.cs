@@ -14,6 +14,7 @@ public class WarriorDashState : WarriorAbilityState
     {
         base.Enter();
         isDashing = true;
+        player.ActivateGhostMode();
         player.disableInvincible(0.1f,1);
         player.SetDash();
         startDashingTime = Time.time;
@@ -23,6 +24,7 @@ public class WarriorDashState : WarriorAbilityState
     {
         base.Exit();
         player.StopDash();
+        player.DeactivateGhostMode();
         //isAbilityOn = true;
 
     }

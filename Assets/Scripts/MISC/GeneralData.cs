@@ -15,16 +15,4 @@ public class GeneralData : MonoBehaviour
     [HideInInspector]
     public DamageEffects.Effects currentBuff;
     
-    private void Awake()
-    {       
-        currentBuff = DamageEffects.Effects.normal;
-        
-    }
-
-    private void Update()
-    {
-
-    }
-
-
 }

@@ -31,7 +31,11 @@ public class WarriorDamageState : WarriorState
     public override void LogicUpdate()
     {
         base.LogicUpdate();
-        if (isHurt)
+        if (player.isDead)
+        {
+            stateMachine.ChangeState(player.deadState);
+        }
+        else if (isHurt)
         {
             if (isGrounded && player.currentVelocity.y < 0.01f)
             {

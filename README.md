@@ -32,7 +32,7 @@ The Final project is going to contain:</p>
 <p><strong>Enemies</strong></p>
 <ul>
 <li>Idle ✔</li>
-<li>Walk</li>
+<li>Walk ✔</li>
 <li>Jump</li>
 <li>Attack Combo</li>
 <li>Follow Player</li>
@@ -66,6 +66,8 @@ PixelArt 2D Style<br>
 <a href="https://clembod.itch.io/warrior-free-animation-set">https://clembod.itch.io/warrior-free-animation-set</a><br>
 <a href="https://anokolisa.itch.io/high-forest-assets-pack">https://anokolisa.itch.io/high-forest-assets-pack</a></br>
 <a href="https://www.gamedevmarket.net/asset/heart-and-health-bar/">https://www.gamedevmarket.net/asset/heart-and-health-bar/</a></p>
+<a href="https://clembod.itch.io/bringer-of-death-free"</a></p>
+<a href="https://sventhole.itch.io/prototype-hero-demo">https://www.gamedevmarket.net/asset/heart-and-health-bar/</a></p>
 <p><strong>developed by:</strong> Kumodevelop</p>
 </div>
 </body>

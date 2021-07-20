@@ -17,11 +17,15 @@ public class WarriorController : MonoBehaviour, IDamageable
     public bool isTakingDamage;
     public bool isInvincible;
     public float invincibleTime;
+    public bool isDead;
     private Ghost ghostMode;
 
     [HideInInspector]
     public bool blink;
     private bool executeBlink;
+
+    public PhysicsMaterial2D noFriction;
+    public PhysicsMaterial2D withFriction;
     //public DamageEffects.Effects currentBuff;
     
     //Other Scripts
@@ -51,6 +55,7 @@ public class WarriorController : MonoBehaviour, IDamageable
     public WarriorAttackState attackState2 { get; private set; }
     public WarriorAttackState attackState3 { get; private set; }       
     public WarriorGetHurtState getHurtState { get; private set; }
+    public WarriorDeadState deadState { get; private set; }
     #endregion
 
     #region WalkVariables
@@ -84,11 +89,13 @@ public class WarriorController : MonoBehaviour, IDamageable
         attackState2 = new WarriorAttackState(this, StateMachine, "attack2");
         attackState3 = new WarriorAttackState(this, StateMachine, "attack3");
         getHurtState = new WarriorGetHurtState(this, StateMachine, "hurt");
+        deadState = new WarriorDeadState(this, StateMachine, "dead");
         generalData = GetComponent<GeneralData>();
         generalData.currentBuff = DamageEffects.Effects.normal;
         spr = GetComponent<SpriteRenderer>();
         ghostMode = GetComponent<Ghost>();
         facingDirection = 1;
+        isDead = false;
         isTakingDamage = false;
         executeBlink = true;
                 
@@ -100,8 +107,7 @@ public class WarriorController : MonoBehaviour, IDamageable
         rb = GetComponent<Rigidbody2D>();
         Anim = GetComponent<Animator>();       
         inputHandler = GetComponent<PlayerInputHandler>();
-        StateMachine.Initialize(idleState);
-        
+        StateMachine.Initialize(idleState);       
     }
 
     public void ActivateGhostMode()
@@ -123,12 +129,22 @@ public class WarriorController : MonoBehaviour, IDamageable
     
     private void Update()
     {
+        if(CheckGround())
+        {            
+            rb.sharedMaterial = withFriction;
+        }
+        else
+        {
+            rb.sharedMaterial = noFriction;
+        }
         if(test)
         {
             generalData.currentBuff = DamageEffects.Effects.poison;
             Debug.Log("Your damage effect is " + generalData.currentBuff);
 
         }
+        if (generalData.hp <= 0)
+            isDead = true;
         //if (isInvincible)
           //  blink = true;
 

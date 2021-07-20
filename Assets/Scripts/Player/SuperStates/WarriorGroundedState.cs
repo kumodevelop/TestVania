@@ -18,8 +18,7 @@ public class WarriorGroundedState : WarriorState
     public bool getHurt;
     
     public WarriorGroundedState(WarriorController player, WarriorStateMachine stateMachine, string animBoolName) : base(player, stateMachine, animBoolName)
-    {
-       
+    {       
     }
 
     public override void DoChecks()
